@@ -1,0 +1,26 @@
+__pycache__/
+*.py[cod]
+
+# Experiment outputs and logs
+results_wsi/
+results_wsi_test/
+*.txt
+*.log
+
+# Model checkpoints
+*.pt
+*.pth
+*.ckpt
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
