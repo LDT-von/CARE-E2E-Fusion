@@ -69,36 +69,44 @@ python main.py --help
 python main.py --dataset dummy --num_samples 4 --max_epochs 1 --k 2 --batch_size 2 --embed_dim 128 --num_heads 4 --num_layers 2 --num_region_tokens 4 --num_tasks 1 --task_names BAP1 --testing
 ```
 
-## Data Preparation
+## Train With CARE Features
 
-This project uses three categories of data. Only the clinical tables and fold splits are included in this repository; the RNA table and WSI patch features must be prepared separately.
-
-| Data | Source | Location |
-| --- | --- | --- |
-| Clinical tables, signatures, and fold splits | Included in this repository | `SlotSPE/dataset_csv/clinical/`, `signatures/`, `splits/` |
-| RNA table | Download from Google Drive | Place under `SlotSPE/dataset_csv/raw_rna_data_inter/` |
-| WSI patch features (`.pt`) | Must be prepared by yourself | Pass the directory to `--data_root_dir` |
-
-### Google Drive RNA table
-
-Download the RNA table from Google Drive, then place it into:
+Prepare a CSV containing at least:
 
 ```text
-SlotSPE/dataset_csv/raw_rna_data_inter/
+slide_id,label
+19579,1
 ```
 
-### WSI patch features
-
-WSI patch features are not included in this repository. After preparing them locally, point `--data_root_dir` to the directory containing the `.pt` files, for example:
+Then point `--data_root_dir` to the folder containing CARE `.npy` features, for
+example `data/MUT/conch_v1_5/19579_0_1024.npy`.
 
 ```bash
 python main.py \
   --dataset real \
   --csv_path dataset_csv/t1_gene_clean_MUT_BAP1.csv \
-  --data_root_dir /path/to/wsi_features \
+  --data_root_dir data/MUT/conch_v1_5 \
   --num_tasks 1 \
   --task_names BAP1 \
   --batch_size 1
+```
+
+The adapter supports CARE dictionaries shaped like:
+
+```python
+{
+    "feature": features,
+    "index": patch_coordinate_names,
+}
+```
+
+or:
+
+```python
+{
+    "feature": features,
+    "coords": coords,
+}
 ```
 
 ## Upload Notes
