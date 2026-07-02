@@ -580,7 +580,8 @@ def get_args():
                         help='使用模拟数据集还是真实数据集')
     parser.add_argument('--num_samples', type=int, default=100,
                         help='模拟数据集样本数')
-    parser.add_argument('--csv_path', type=str, default='blca_slides.csv')
+    parser.add_argument('--csv_path', type=str,
+                        default=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'blca_slides.csv'))
     parser.add_argument('--data_root_dir', type=str, default='E:/TCGA-data/CPathPatchFeature/blca/chief/pt_files')
 
     # 模型配置
