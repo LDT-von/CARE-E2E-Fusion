@@ -498,7 +498,7 @@ def get_args():
 
     parser.add_argument('--dataset', type=str, default='dummy', choices=['dummy', 'real'])
     parser.add_argument('--num_samples', type=int, default=100)
-    parser.add_argument('--csv_path', type=str, default='C:/Users/cwnu/Desktop/CARE-E2E-Fusion/CARE-E2E-Fusion/blca_slides.csv')
+    parser.add_argument('--csv_path', type=str, default=str(ROOT.parent / 'CARE-E2E-Fusion' / 'blca_slides.csv'))
     parser.add_argument('--data_root_dir', type=str, default='E:/TCGA-data/CPathPatchFeature/blca/chief/pt_files')
 
     parser.add_argument('--atom_dim', type=int, default=256)

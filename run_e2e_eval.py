@@ -10,7 +10,7 @@ from torch.utils.data import DataLoader, Subset
 warnings.filterwarnings('ignore')
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-CSV_PATH = r"C:\Users\cwnu\Desktop\CARE-E2E-Fusion\CARE-E2E-Fusion\blca_slides.csv"
+CSV_PATH = os.path.join(ROOT, 'CARE-E2E-Fusion', 'blca_slides.csv')
 DATA_ROOT = r"E:/TCGA-data/CPathPatchFeature/blca/chief/pt_files"
 
 def seed_all(s=42):
@@ -192,20 +192,20 @@ for exp_name in sorted(os.listdir(e2e_root)):
     print("="*64)
 
 # Save
-out_path = os.path.join(ROOT, 'AUC_SUMMARY_E2E.json')
+out_path = os.path.join(ROOT, 'auc_summary_e2e.json')
 with open(out_path, 'w', encoding='utf-8') as f:
     json.dump(FINAL_E2E, f, ensure_ascii=False, indent=2)
 print(f"\nSaved E2E results: {out_path}")
 
 # Merge with overall summary
-if os.path.exists(os.path.join(ROOT, 'AUC_SUMMARY_FINAL.json')):
-    with open(os.path.join(ROOT, 'AUC_SUMMARY_FINAL.json'), 'r', encoding='utf-8') as f:
+if os.path.exists(os.path.join(ROOT, 'auc_summary_all.json')):
+    with open(os.path.join(ROOT, 'auc_summary_all.json'), 'r', encoding='utf-8') as f:
         overall = json.load(f)
     for k, v in FINAL_E2E.items():
         overall[f"E2E/{k}"] = v
-    with open(os.path.join(ROOT, 'AUC_SUMMARY_FINAL.json'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(ROOT, 'auc_summary_all.json'), 'w', encoding='utf-8') as f:
         json.dump(overall, f, ensure_ascii=False, indent=2)
-    print(f"Merged into AUC_SUMMARY_FINAL.json")
+    print(f"Merged into auc_summary_all.json")
 
     # Print final combined table
     rows = []

@@ -11,7 +11,7 @@ from torch.utils.data import DataLoader, Subset
 warnings.filterwarnings('ignore')
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-CSV_PATH = r"C:\Users\cwnu\Desktop\CARE-E2E-Fusion\CARE-E2E-Fusion\blca_slides.csv"
+CSV_PATH = os.path.join(ROOT, 'CARE-E2E-Fusion', 'blca_slides.csv')
 DATA_ROOT = r"E:/TCGA-data/CPathPatchFeature/blca/chief/pt_files"
 
 def seed_all(s=42):
@@ -316,7 +316,7 @@ for k, n, mean, std, mn, mx in rows:
     print(f"{k:<40s} {n:>3d} {mean:>9.4f} {std:>7.4f} {mn:>7.4f} {mx:>7.4f}")
 print("="*84)
 
-out_json = os.path.join(ROOT, 'AUC_SUMMARY_FINAL.json')
+out_json = os.path.join(ROOT, 'auc_summary_all.json')
 with open(out_json, 'w', encoding='utf-8') as f:
     json.dump(FINAL, f, ensure_ascii=False, indent=2)
 print(f"\nSaved JSON summary to: {out_json}")
